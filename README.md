@@ -53,6 +53,8 @@ Alternatively you can also create a timer and start it later.
 Lets take a look at the infinite timer which shows its invocation count
 
 ```swift
+let timerQueue:dispatch_queue_t = dispatch_queue_create("timerQueue", 
+
 let infiniteTimer = DispatchTimer.timerWithTimeInterval(milliseconds: 1000, queue: timerQueue, repeats: true) { (timer:DispatchTimer) in
     if var userInfo = timer.userInfoº as? UInt {
         NSLog("infiniteTimer: Invocation #\(userInfo)")
@@ -64,6 +66,6 @@ let infiniteTimer = DispatchTimer.timerWithTimeInterval(milliseconds: 1000, queu
 infiniteTimer.userInfoº = UInt(0)
 infiniteTimer.start()
 ```
-###Requirement
+##Requirement
 * Swift 2.0 (Xcode 7+)
 * iOS 7+
