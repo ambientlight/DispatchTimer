@@ -58,7 +58,7 @@ public class DispatchTimer: Equatable {
             self.invocationBlock(timer: self)
             if(self.isFinite){
                 
-                self.remainingFireCount--
+                self.remainingFireCount -= 1
                 if(self.remainingFireCount == 0){
                     dispatch_source_cancel(self._timerSource)
                 }
