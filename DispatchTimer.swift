@@ -163,18 +163,18 @@ public class DispatchTimer: Equatable {
             
             _elapsedAccumulatedTime += (pauseDate.timeIntervalSince1970 - _lastActiveDateº!.timeIntervalSince1970) * 1000
             
-            //NSLog("%ld milliseconds elapsed", UInt(_elapsedAccumulatedTime))
+            //print("%ld milliseconds elapsed", UInt(_elapsedAccumulatedTime))
         }
     }
     
     public func resume(){
         
         if (self.status == .Paused){
-            
-            //NSLog("%ld milliseconds left till fire", self.interval - UInt(_elapsedAccumulatedTime))
+            let startOffset: UInt = self.interval < UInt(_elapsedAccumulatedTime) ? 0 : self.interval - UInt(_elapsedAccumulatedTime)
+            //print("%ld milliseconds left till fire", startOffset)
             
             _timerSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
-            _setupTimerSource(self.interval, startOffset: self.interval - UInt(_elapsedAccumulatedTime), leeway: 0)
+            _setupTimerSource(self.interval, startOffset: startOffset, leeway: 0)
             dispatch_resume(_timerSource)
             
             _lastActiveDateº = NSDate()
